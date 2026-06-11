@@ -33,6 +33,45 @@ const channels = [
 
   <section class="section-tight">
     <div class="container">
+      <div class="form-wrap card">
+        <h2 class="form-title">Send us a message</h2>
+        <p class="form-sub">Fill this in and it reaches us directly. We read every note.</p>
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/maqzponz" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New inquiry from vegalinks.ai" />
+          <!-- honeypot: bots fill this, humans never see it -->
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
+
+          <div class="field-row">
+            <label class="field">
+              <span>Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+          <label class="field">
+            <span>Phone <em>(optional)</em></span>
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+          <label class="field">
+            <span>Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <p class="or-direct">Or reach a specific team directly:</p>
       <div class="grid grid-3">
         {channels.map((c) => (
           <a class="card contact-card" href={`mailto:${c.email}?subject=${c.subject}`}>
@@ -66,4 +105,68 @@ const channels = [
   .contact-band { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; padding: 1.4rem 0; }
   .contact-band p { margin: 0; }
   .contact-band a { color: var(--accent); font-weight: 600; }
+
+  .form-wrap { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  .form-title { margin: 0 0 0.3rem; }
+  .form-sub { margin: 0 0 1.6rem; color: var(--muted); }
+  .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field > span { font-size: 0.82rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em; }
+  .field > span em { font-weight: 400; font-style: normal; color: var(--faint); }
+  .field input, .field textarea {
+    width: 100%; box-sizing: border-box;
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 0.7rem 0.85rem; font: inherit; font-size: 0.95rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .hp { position: absolute; left: -9999px; opacity: 0; width: 0; height: 0; }
+  .form-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.3rem; }
+  .form-status { margin: 0; font-size: 0.9rem; }
+  .form-status.ok { color: var(--accent); }
+  .form-status.err { color: #ff8a8a; }
+  .or-direct { text-align: center; color: var(--muted); margin: 0 0 1.2rem; font-size: 0.92rem; }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
 </style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('form-status');
+  if (form && statusEl) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      statusEl.className = 'form-status';
+      statusEl.textContent = 'Sending…';
+      if (btn) btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          form.reset();
+          statusEl.className = 'form-status ok';
+          statusEl.textContent = 'Thanks — your message is on its way. We’ll be in touch.';
+        } else {
+          const msg = data.errors ? data.errors.map((x: { message: string }) => x.message).join(', ') : '';
+          statusEl.className = 'form-status err';
+          statusEl.textContent = msg || 'Something went wrong. Please email us directly.';
+        }
+      } catch {
+        statusEl.className = 'form-status err';
+        statusEl.textContent = 'Network error. Please email us directly.';
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+  }
+</script>
