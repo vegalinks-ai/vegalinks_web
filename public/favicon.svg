@@ -1,10 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <rect width="64" height="64" rx="14" fill="#0a0e1a"/>
-  <path d="M32 8 L37 27 L56 32 L37 37 L32 56 L27 37 L8 32 L27 27 Z" fill="url(#g)"/>
   <defs>
-    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#7dd3fc"/>
-      <stop offset="1" stop-color="#22d3ee"/>
+    <linearGradient id="vBlade" x1="10" y1="22" x2="58" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4b06a"/>
+      <stop offset="0.45" stop-color="#cf7a33"/>
+      <stop offset="1" stop-color="#2f5aa8"/>
     </linearGradient>
+    <linearGradient id="comet" x1="52" y1="86" x2="120" y2="6" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9772f"/>
+      <stop offset="0.55" stop-color="#eaa052"/>
+      <stop offset="1" stop-color="#f8cd8a"/>
+    </linearGradient>
+    <radialGradient id="star" cx="0.5" cy="0.45" r="0.6">
+      <stop stop-color="#ffe0a6"/>
+      <stop offset="0.5" stop-color="#eaa052"/>
+      <stop offset="1" stop-color="#3563b0"/>
+    </radialGradient>
   </defs>
+  <g transform="translate(9,13) scale(0.36)">
+    <path d="M10 33 L27 27 L62 86 L47 93 Z" fill="url(#vBlade)"/>
+    <path d="M47 86 L60 79 L122 5 L104 17 L93 30 Z" fill="url(#comet)"/>
+    <path d="M88 34 L101 22 L99 38 Z" fill="url(#comet)"/>
+    <path d="M40 7 L42.3 19.5 L52.7 12.3 L45.5 22.7 L58 25 L45.5 27.3 L52.7 37.7 L42.3 30.5 L40 43 L37.7 30.5 L27.3 37.7 L34.5 27.3 L22 25 L34.5 22.7 L27.3 12.3 L37.7 19.5 Z" fill="url(#star)"/>
+  </g>
 </svg>

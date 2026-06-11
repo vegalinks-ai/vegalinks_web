@@ -5,12 +5,13 @@
   <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="wf-stroke" x1="0" y1="0" x2="520" y2="0" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#7dd3fc"/>
-        <stop offset="1" stop-color="#22d3ee"/>
+        <stop stop-color="#f4b06a"/>
+        <stop offset="0.5" stop-color="#e7984f"/>
+        <stop offset="1" stop-color="#5e8ef0"/>
       </linearGradient>
       <radialGradient id="wf-glow" cx="50%" cy="50%" r="50%">
-        <stop stop-color="rgba(34,211,238,0.25)"/>
-        <stop offset="1" stop-color="rgba(34,211,238,0)"/>
+        <stop stop-color="rgba(231,152,79,0.22)"/>
+        <stop offset="1" stop-color="rgba(231,152,79,0)"/>
       </radialGradient>
     </defs>
 
@@ -32,7 +33,7 @@
     <path class="sig sig-1" d="M40 180 C120 90 160 270 230 180 S330 90 400 180 480 200 480 180" stroke="url(#wf-stroke)" stroke-width="3"/>
 
     <!-- moving node -->
-    <circle class="node" r="5" fill="#22d3ee">
+    <circle class="node" r="5" fill="#f4b06a">
       <animateMotion dur="4.5s" repeatCount="indefinite" path="M40 180 C120 90 160 270 230 180 S330 90 400 180 480 200 480 180"/>
     </circle>
   </svg>
@@ -50,7 +51,7 @@
   }
   .sig-2 { animation-delay: 0.5s; }
   .sig-3 { animation-delay: 1s; }
-  .node { filter: drop-shadow(0 0 6px rgba(34,211,238,0.9)); }
+  .node { filter: drop-shadow(0 0 6px rgba(244,176,106,0.9)); }
   @keyframes draw {
     0% { stroke-dashoffset: 1400; }
     45% { stroke-dashoffset: 0; }

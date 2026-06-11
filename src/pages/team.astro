@@ -3,41 +3,69 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const pedigree = ['Inphi', 'Marvell', 'Broadcom', 'AMD', 'Cisco', 'MaxLinear', 'Keysight', 'Cortina'];
+const leaders = [
+  {
+    name: 'Karthik Gopalakrishnan',
+    role: 'Founder & CEO',
+    photo: 'karthik.png',
+    bio: 'Senior Fellow at AMD, where he enabled interconnect solutions for the MI accelerator products. Previously drove 25G–100G PAM4 SerDes development at Inphi, and earlier at Infineon. 26+ years as a broadband analog/mixed-signal expert, system architect, and wireline-interconnect specialist.',
+    chips: ['AMD — Senior Fellow', 'Inphi', 'Infineon'],
+  },
+  {
+    name: 'Rajesh Radhamohan',
+    role: 'Chief Product Officer',
+    photo: 'Rajesh.png',
+    bio: '30+ years in broadband analog and product leadership. Led product marketing for the industry’s first 50G/L and 100G/L solutions at Inphi and Maxlinear, driving successful engagements with hyperscale customers. Career spans Cisco, Maxlinear, Inphi, Broadcom, and Lucent.',
+    chips: ['Cisco', 'Maxlinear', 'Inphi', 'Broadcom', 'Lucent'],
+  },
+];
 
-const roles = [
-  { area: 'Product', note: 'Veteran product leadership from across high-speed connectivity and optical DSP.' },
-  { area: 'Systems & DSP', note: 'Broadband system architecture and DSP design for wireline links.' },
-  { area: 'DSP architecture', note: 'Lead architects behind shipping high-speed DSP transceivers.' },
-  { area: 'Analog / mixed-signal', note: 'Broadband analog front-end design at the cutting edge of process.' },
-  { area: 'Digital', note: 'Digital design and integration at datacenter silicon scale.' },
+const advisors = [
+  {
+    name: 'Sudeep Bhoja',
+    role: 'Co-founder & CTO, d-Matrix',
+    photo: 'Sudeep.png',
+    bio: 'Data center and AI infrastructure expert. Former CTO of Inphi; previously Broadcom and Bigbear Networks.',
+  },
+  {
+    name: 'Gopal Raghavan',
+    role: 'Co-founder, Inphi & Eta Compute',
+    photo: 'gopal.png',
+    bio: 'Expert in edge AI, memory systems, and broadband analog & mixed-signal. Previously at Microsoft and Cadence.',
+  },
+  {
+    name: 'Richard Ogawa',
+    role: 'General Counsel',
+    photo: 'Ricahrd.png',
+    bio: 'Seasoned technology counsel. Previously Khosla Ventures, Townsend, and Inphi.',
+  },
 ];
 ---
-<Base title="Team" description="Vega Links is founded and staffed by veterans of high-speed SerDes and optical DSP, advised by leaders in AI infrastructure and mixed-signal design.">
+<Base title="Team" description="Vega Links is led by veterans of high-speed SerDes and optical DSP, advised by leaders in AI infrastructure, mixed-signal design, and technology law.">
   <PageHeader
     eyebrow="Team"
     title="Built by people who have shipped high-speed interconnect."
-    lead="A small, senior team with deep roots in the companies that defined modern SerDes and optical DSP — backed by advisors at the frontier of AI infrastructure."
+    lead="A senior team with deep roots in the companies that defined modern SerDes and optical DSP — backed by advisors at the frontier of AI infrastructure."
   />
 
   <section class="section-tight">
     <div class="container">
-      <div class="founder panel">
-        <div class="founder-mark"><img src={`${base}/mark.svg`} alt="" width="56" height="56" /></div>
-        <div class="founder-body">
-          <h2>Karthik Gopalakrishnan</h2>
-          <p class="founder-role">Founder &amp; CTO</p>
-          <p>
-            Broadband analog/mixed-signal expert, system architect, and wireline-interconnect
-            specialist. Former Senior Fellow at AMD, where he led interconnect solutions for
-            datacenter accelerator products; previously at Inphi and Infineon.
-          </p>
-          <div class="chips">
-            <span class="chip">AMD — Senior Fellow</span>
-            <span class="chip">Inphi</span>
-            <span class="chip">Infineon</span>
+      <div class="grid grid-2">
+        {leaders.map((p) => (
+          <div class="card leader">
+            <div class="leader-head">
+              <img class="avatar" src={`${base}/${p.photo}`} alt={p.name} width="104" height="104" />
+              <div>
+                <h3>{p.name}</h3>
+                <p class="role">{p.role}</p>
+              </div>
+            </div>
+            <p>{p.bio}</p>
+            <div class="chips">
+              {p.chips.map((c) => <span class="chip">{c}</span>)}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
@@ -45,42 +73,26 @@ const roles = [
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">The team</span>
-        <h2>Senior leads across every layer of the stack</h2>
+        <span class="eyebrow">Advisors</span>
+        <h2>Guided by leaders in AI infrastructure and mixed-signal design</h2>
         <p class="lead">
-          We are assembling specialists in analog, mixed-signal, DSP, and digital design — the people
-          who have already taken interconnect from one generation to the next.
+          Vega Links is advised by industry veterans across AI compute, broadband analog, and
+          technology law.
         </p>
       </div>
       <div class="grid grid-3">
-        {roles.map((r) => (
-          <div class="card">
-            <span class="role-area">{r.area}</span>
-            <p>{r.note}</p>
+        {advisors.map((a) => (
+          <div class="card advisor">
+            <div class="advisor-head">
+              <img class="avatar avatar-sm" src={`${base}/${a.photo}`} alt={a.name} width="84" height="84" />
+              <div>
+                <h3>{a.name}</h3>
+                <p class="role">{a.role}</p>
+              </div>
+            </div>
+            <p>{a.bio}</p>
           </div>
         ))}
-      </div>
-      <div class="pedigree">
-        <span class="pedigree-label">Experience from</span>
-        <div class="chips">
-          {pedigree.map((c) => <span class="chip">{c}</span>)}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-tight">
-    <div class="container">
-      <div class="card advisors">
-        <div>
-          <span class="eyebrow">Advisors</span>
-          <h2>Guided by leaders in AI infrastructure and mixed-signal design</h2>
-        </div>
-        <p class="lead">
-          Vega Links is advised by industry veterans — including a co-founder/CTO in AI compute and a
-          professor of mixed-signal circuit design at a leading European research university — with
-          backgrounds spanning d-Matrix, Inphi, Broadcom, and Aquantia.
-        </p>
       </div>
     </div>
   </section>
@@ -88,7 +100,7 @@ const roles = [
   <section class="section-tight">
     <div class="container">
       <div class="next">
-        <p>Want to build this with us?</p>
+        <p>We are growing the team across analog, mixed-signal, DSP, and digital.</p>
         <a class="btn btn-primary" href={`${base}/careers`}>See open roles →</a>
       </div>
     </div>
@@ -96,23 +108,24 @@ const roles = [
 </Base>
 
 <style>
-  .founder { display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: start; }
-  .founder-mark {
-    width: 88px; height: 88px; display: grid; place-items: center;
-    background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.25); border-radius: 18px;
+  .leader { display: flex; flex-direction: column; gap: 0.9rem; }
+  .leader-head { display: flex; align-items: center; gap: 1rem; }
+  .avatar {
+    width: 104px; height: 104px; flex: none; border-radius: 50%; object-fit: cover;
+    object-position: center top; filter: grayscale(1); background: var(--accent-soft);
+    border: 1px solid rgba(231,152,79,0.3);
   }
-  .founder-body h2 { margin-bottom: 0.2rem; }
-  .founder-role { color: var(--accent); font-weight: 600; margin-bottom: 0.9rem; }
-  .role-area { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem; }
-  .pedigree { margin-top: 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .pedigree-label { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
-  .advisors { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.6rem; align-items: center; }
-  .advisors h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 0; }
-  .advisors p { margin: 0; }
+  .avatar-sm { width: 84px; height: 84px; }
+  .leader-head h3 { margin: 0; }
+  .role { color: var(--accent); font-weight: 600; margin: 0.15rem 0 0; }
+  .leader p:not(.role) { margin: 0; }
+  .advisor { display: flex; flex-direction: column; gap: 0.6rem; }
+  .advisor-head { display: flex; align-items: center; gap: 0.85rem; }
+  .advisor-head h3 { margin: 0; }
+  .advisor p:last-child { margin: 0; }
   .next { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .next p { margin: 0; color: var(--text); font-weight: 600; }
   @media (max-width: 760px) {
-    .founder { grid-template-columns: 1fr; }
-    .advisors { grid-template-columns: 1fr; }
+    .leader-head { align-items: flex-start; }
   }
 </style>
