@@ -3,13 +3,13 @@
 Marketing site for Vega Links, built with [Astro](https://astro.build) and deployed to GitHub Pages
 via GitHub Actions.
 
-**Live:** https://vegalinks-ai.github.io/vegalinks_web/
+**Live:** https://vegalinks.ai/
 
 ## Local development
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/vegalinks_web
+npm run dev      # http://localhost:4321/
 ```
 
 Other commands:

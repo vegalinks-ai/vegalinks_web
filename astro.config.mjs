@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 
-// Project page served at https://vegalinks-ai.github.io/vegalinks_web/
+// Served at the custom apex domain https://vegalinks.ai/ (GitHub Pages)
 export default defineConfig({
-  site: 'https://vegalinks-ai.github.io',
-  base: '/vegalinks_web',
+  site: 'https://vegalinks.ai',
+  base: '/',
   output: 'static',
   trailingSlash: 'ignore',
 });

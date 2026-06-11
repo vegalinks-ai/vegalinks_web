@@ -6,8 +6,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const stats = [
   { value: '$100B', label: 'Opportunity ahead', note: 'AI-driven interconnect across the datacenter' },
-  { value: '~30%', label: 'Annual growth', note: 'Compounding with every accelerator generation' },
-  { value: '8×', label: 'Bandwidth scaled', note: 'From 28G to 224G per lane and climbing' },
+  { value: '~60%', label: 'Annual growth', note: 'Compounding with every accelerator generation' },
   { value: '0–50m', label: 'Reach we span', note: 'In-package, in-tray, and across the rack' },
 ];
 
@@ -27,7 +26,7 @@ const evolution = [
 
   <section class="section-tight">
     <div class="container">
-      <div class="grid grid-4">
+      <div class="grid grid-3">
         {stats.map((s) => <StatCard value={s.value} label={s.label} note={s.note} />)}
       </div>
       <p class="src">Figures reflect widely reported industry estimates for AI datacenter interconnect.</p>
