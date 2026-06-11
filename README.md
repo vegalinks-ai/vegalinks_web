@@ -3,7 +3,7 @@
 Marketing site for Vega Links, built with [Astro](https://astro.build) and deployed to GitHub Pages
 via GitHub Actions.
 
-**Live:** https://vegalinks-karthik.github.io/vegalinks_web/
+**Live:** https://vegalinks-ai.github.io/vegalinks_web/
 
 ## Local development
 
