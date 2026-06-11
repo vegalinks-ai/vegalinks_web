@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const beliefs = [
+  {
+    title: 'Copper is not done',
+    body: 'Each generation of high-speed copper was supposed to be the last. Each time, a critical innovation extended it. We believe the ecosystem has more generations ahead — and intend to deliver them.',
+  },
+  {
+    title: 'The fabric is the frontier',
+    body: 'As compute consolidates into ever-larger AI systems, the interconnect between chips, trays, and racks becomes the gating factor for performance, cost, and power. That is where we focus.',
+  },
+  {
+    title: 'Production-grade, from day one',
+    body: 'AI networks fail in costly ways. Our north star is technology that is calibrated, diagnosable, and manufacturable at the volumes these deployments demand.',
+  },
+];
+---
+<Base title="Mission" description="Vega Links exists to carry the high-speed interconnect ecosystem through its next generations for the AI datacenter.">
+  <PageHeader
+    eyebrow="Mission"
+    title="Keep the AI datacenter connected — generation after generation."
+    lead="Vega Links exists to extend the high-speed interconnect ecosystem the AI buildout depends on, breaking the bandwidth-and-reach ceiling without asking the industry to start over."
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="statement panel">
+        <p class="statement-text">
+          AI's appetite for bandwidth is outrunning the links that feed it. We are building the
+          interconnect that keeps that fabric <span class="text-accent">fast, far-reaching, and
+          efficient</span> — so the next generations of AI infrastructure have room to grow.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we believe</span>
+        <h2>Why we are doing this</h2>
+      </div>
+      <div class="grid grid-3">
+        {beliefs.map((b) => (
+          <div class="card">
+            <h3>{b.title}</h3>
+            <p>{b.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="next">
+        <p>See where this fits in the market.</p>
+        <a class="btn btn-ghost" href={`${base}/market`}>Market outlook →</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .statement { padding: clamp(1.8rem, 4vw, 3rem); }
+  .statement-text {
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    line-height: 1.5;
+    color: var(--text);
+    font-weight: 500;
+    margin: 0;
+  }
+  .next { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .next p { margin: 0; color: var(--text); font-weight: 600; }
+</style>

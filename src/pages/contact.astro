@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const channels = [
+  {
+    label: 'Investors',
+    email: 'info@vegalinks.ai',
+    blurb: 'We are happy to share our story, market thesis, and detailed materials under NDA. Reach out to start a conversation.',
+    subject: 'Investor%20inquiry',
+  },
+  {
+    label: 'Talent',
+    email: 'careers@vegalinks.ai',
+    blurb: 'Founding-team roles across analog, mixed-signal, DSP, and digital. Tell us what you have built.',
+    subject: 'Joining%20Vega%20Links',
+  },
+  {
+    label: 'Partners',
+    email: 'info@vegalinks.ai',
+    blurb: 'Cable, connector, and platform partners building the AI interconnect ecosystem — let’s talk.',
+    subject: 'Partnership%20inquiry',
+  },
+];
+---
+<Base title="Contact" description="Get in touch with Vega Links — investor, talent, and partnership inquiries.">
+  <PageHeader
+    eyebrow="Contact"
+    title="Let's talk."
+    lead="Vega Links is in stealth, but we are actively talking with investors, candidates, and ecosystem partners. The fastest way to reach us is email."
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="grid grid-3">
+        {channels.map((c) => (
+          <a class="card contact-card" href={`mailto:${c.email}?subject=${c.subject}`}>
+            <span class="role-area">{c.label}</span>
+            <p>{c.blurb}</p>
+            <span class="contact-email">{c.email} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="contact-band">
+        <span class="pill"><span class="dot"></span> Stealth mode</span>
+        <p>
+          Detailed technology, performance, and roadmap materials are available under NDA.
+          Email <a href="mailto:info@vegalinks.ai">info@vegalinks.ai</a> and we'll set up a conversation.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-card { display: flex; flex-direction: column; gap: 0.6rem; }
+  .role-area { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .contact-card p { flex: 1; margin: 0; }
+  .contact-email { font-weight: 600; color: var(--accent); font-size: 0.92rem; }
+  .contact-band { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; padding: 1.4rem 0; }
+  .contact-band p { margin: 0; }
+  .contact-band a { color: var(--accent); font-weight: 600; }
+</style>

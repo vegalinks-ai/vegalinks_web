@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#070b14"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.5">
+    <path d="M0 470 Q150 410 300 470 T600 470 T900 470 T1200 470" stroke="#22d3ee" stroke-width="2" fill="none" opacity="0.4"/>
+    <path d="M0 510 Q150 560 300 510 T600 510 T900 510 T1200 510" stroke="#7dd3fc" stroke-width="2" fill="none" opacity="0.3"/>
+  </g>
+  <path d="M150 150 L162 196 L208 208 L162 220 L150 266 L138 220 L92 208 L138 196 Z" fill="url(#sg)"/>
+  <text x="240" y="222" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="700" fill="#f8fafc" letter-spacing="2">VEGA LINKS</text>
+  <text x="152" y="350" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="600" fill="#e2e8f0">Interconnect for the AI era.</text>
+  <text x="152" y="410" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="400" fill="#94a3b8">Next-generation high-speed interconnect beyond 200G —</text>
+  <text x="152" y="448" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="400" fill="#94a3b8">spanning the full 0–50m reach of the AI datacenter.</text>
+  <text x="152" y="560" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#22d3ee" letter-spacing="3">STEALTH MODE</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#070b14"/>
+    </linearGradient>
+    <linearGradient id="sg" x1="92" y1="150" x2="208" y2="266" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+</svg>

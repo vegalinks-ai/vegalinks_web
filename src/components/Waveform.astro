@@ -1,0 +1,63 @@
+---
+// Decorative animated signal graphic — abstract, not a real eye/architecture diagram.
+---
+<div class="wf" aria-hidden="true">
+  <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wf-stroke" x1="0" y1="0" x2="520" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7dd3fc"/>
+        <stop offset="1" stop-color="#22d3ee"/>
+      </linearGradient>
+      <radialGradient id="wf-glow" cx="50%" cy="50%" r="50%">
+        <stop stop-color="rgba(34,211,238,0.25)"/>
+        <stop offset="1" stop-color="rgba(34,211,238,0)"/>
+      </radialGradient>
+    </defs>
+
+    <circle cx="260" cy="180" r="170" fill="url(#wf-glow)"/>
+
+    <!-- grid -->
+    <g stroke="#1e2c46" stroke-width="1" opacity="0.6">
+      <line x1="40" y1="80" x2="480" y2="80"/>
+      <line x1="40" y1="180" x2="480" y2="180"/>
+      <line x1="40" y1="280" x2="480" y2="280"/>
+      <line x1="160" y1="40" x2="160" y2="320"/>
+      <line x1="260" y1="40" x2="260" y2="320"/>
+      <line x1="360" y1="40" x2="360" y2="320"/>
+    </g>
+
+    <!-- layered traveling signals -->
+    <path class="sig sig-3" d="M40 180 C100 120 140 240 200 180 S300 110 360 180 480 240 480 180" stroke="url(#wf-stroke)" stroke-width="2" opacity="0.25"/>
+    <path class="sig sig-2" d="M40 180 C110 250 150 110 210 180 S320 250 380 180 480 120 480 180" stroke="url(#wf-stroke)" stroke-width="2" opacity="0.45"/>
+    <path class="sig sig-1" d="M40 180 C120 90 160 270 230 180 S330 90 400 180 480 200 480 180" stroke="url(#wf-stroke)" stroke-width="3"/>
+
+    <!-- moving node -->
+    <circle class="node" r="5" fill="#22d3ee">
+      <animateMotion dur="4.5s" repeatCount="indefinite" path="M40 180 C120 90 160 270 230 180 S330 90 400 180 480 200 480 180"/>
+    </circle>
+  </svg>
+</div>
+
+<style>
+  .wf { width: 100%; max-width: 540px; margin-inline: auto; }
+  .wf svg { width: 100%; height: auto; overflow: visible; }
+  .sig {
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw 5s ease-in-out infinite;
+  }
+  .sig-2 { animation-delay: 0.5s; }
+  .sig-3 { animation-delay: 1s; }
+  .node { filter: drop-shadow(0 0 6px rgba(34,211,238,0.9)); }
+  @keyframes draw {
+    0% { stroke-dashoffset: 1400; }
+    45% { stroke-dashoffset: 0; }
+    80% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -1400; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sig { stroke-dashoffset: 0; animation: none; }
+  }
+</style>

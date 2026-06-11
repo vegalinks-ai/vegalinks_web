@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import StatCard from '../components/StatCard.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const stats = [
+  { value: '$100B', label: 'Opportunity ahead', note: 'AI-driven interconnect across the datacenter' },
+  { value: '~30%', label: 'Annual growth', note: 'Compounding with every accelerator generation' },
+  { value: '8×', label: 'Bandwidth scaled', note: 'From 28G to 224G per lane and climbing' },
+  { value: '0–50m', label: 'Reach we span', note: 'In-package, in-tray, and across the rack' },
+];
+
+const evolution = [
+  { era: '28G', note: 'The industry moves from NRZ toward higher-order modulation.' },
+  { era: '56G', note: 'DSP-based transceivers bring stronger, more accurate equalization.' },
+  { era: '112G', note: 'DSP proves robust across demanding loss profiles.' },
+  { era: '224G', note: 'Loss and reach budgets tighten — the next step needs new thinking.' },
+];
+---
+<Base title="Market" description="AI's demand for high-speed interconnect is creating a $100B-class, fast-growing opportunity. Vega Links is built for the generation beyond 200G.">
+  <PageHeader
+    eyebrow="Market outlook"
+    title="AI's insatiable demand for interconnect."
+    lead="Every leap in AI compute multiplies the high-speed links inside the rack. That demand is creating one of the largest, fastest-growing opportunities in semiconductors — and a hard technical wall right where we operate."
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="grid grid-4">
+        {stats.map((s) => <StatCard value={s.value} label={s.label} note={s.note} />)}
+      </div>
+      <p class="src">Figures reflect widely reported industry estimates for AI datacenter interconnect.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The trajectory</span>
+        <h2>A decade of bandwidth gains — each enabled by a critical innovation.</h2>
+        <p class="lead">
+          High-speed interconnect has roughly doubled per-lane bandwidth every generation. Each step
+          demanded a breakthrough. The move beyond 200G is the next — and the hardest yet.
+        </p>
+      </div>
+      <ol class="timeline">
+        {evolution.map((e, i) => (
+          <li class="t-item">
+            <span class="t-era grad">{e.era}</span>
+            <span class="t-note">{e.note}</span>
+            {i < evolution.length - 1 && <span class="t-arrow">→</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Why it is getting harder</h3>
+          <p>
+            Beyond 200G, the bandwidth and reach the datacenter needs collide with the physics of the
+            channel and the power budget of the system. Pushing further with conventional approaches
+            costs reach, energy, or both.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Why it matters more</h3>
+          <p>
+            At AI scale, interconnect is no longer a detail — it is sheer volume, and failure is
+            costly. The networks being built now need links that are faster, reach further, and stay
+            reliable in production.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="next">
+        <p>How we are approaching it.</p>
+        <a class="btn btn-ghost" href={`${base}/approach`}>Our approach →</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .src { color: var(--faint); font-size: 0.82rem; margin-top: 1.2rem; }
+  .grad { background: linear-gradient(120deg, var(--accent-2), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .timeline { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .t-item { position: relative; background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
+  .t-era { display: block; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .t-note { color: var(--muted); font-size: 0.92rem; }
+  .t-arrow { position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); color: var(--accent); z-index: 2; }
+  .next { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .next p { margin: 0; color: var(--text); font-weight: 600; }
+  @media (max-width: 860px) {
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .t-arrow { display: none; }
+  }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } }
+</style>

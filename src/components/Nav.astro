@@ -1,0 +1,114 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/mission', label: 'Mission' },
+  { href: '/market', label: 'Market' },
+  { href: '/approach', label: 'Approach' },
+  { href: '/team', label: 'Team' },
+  { href: '/careers', label: 'Careers' },
+  { href: '/contact', label: 'Contact' },
+];
+const isActive = (href) => path === `${base}${href}` || path === href;
+---
+<header class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a class="brand" href={`${base}/`} aria-label="Vega Links home">
+      <img src={`${base}/mark.svg`} alt="" width="26" height="26" />
+      <span class="brand-name">VEGA LINKS</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      {links.map((l) => (
+        <a href={`${base}${l.href}`} class={isActive(l.href) ? 'active' : ''}>{l.label}</a>
+      ))}
+    </nav>
+
+    <a class="btn btn-primary nav-cta" href={`${base}/careers`}>Join us</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    {links.map((l) => (
+      <a href={`${base}${l.href}`} class={isActive(l.href) ? 'active' : ''}>{l.label}</a>
+    ))}
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(7, 11, 20, 0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 68px;
+  }
+  .brand { display: flex; align-items: center; gap: 0.6rem; }
+  .brand-name {
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .nav-links { display: flex; align-items: center; gap: 1.6rem; }
+  .nav-links a {
+    font-size: 0.92rem;
+    color: var(--muted);
+    transition: color 0.15s ease;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-cta { padding: 0.55rem 1.1rem; font-size: 0.88rem; }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-toggle span {
+    width: 24px; height: 2px;
+    background: var(--text);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .mobile-menu { display: none; flex-direction: column; padding: 0 24px; }
+  .mobile-menu a {
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .mobile-menu a.active { color: var(--accent); }
+
+  @media (max-width: 880px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    .mobile-menu.open { display: flex; padding-bottom: 1rem; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

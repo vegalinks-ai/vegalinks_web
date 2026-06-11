@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const principles = [
+  {
+    title: 'Span the full reach',
+    body: 'One coherent approach across the whole 0–50m spectrum of the AI datacenter — from in-package links to across-the-rack cable — rather than a different point solution for every distance.',
+  },
+  {
+    title: 'Beyond 200G, efficiently',
+    body: 'Push per-lane bandwidth past where conventional copper runs out of room, while holding the line on reach and energy-per-bit instead of trading one for the other.',
+  },
+  {
+    title: 'First-principles analog + DSP',
+    body: 'Deep mixed-signal and DSP co-design — the disciplines that carried the last several generations of high-speed links — applied to the problems the next generation creates.',
+  },
+  {
+    title: 'Fit the existing ecosystem',
+    body: 'Work with the cables, connectors, modulation, and SoC silicon the industry already builds around, so adoption does not require the world to start over.',
+  },
+  {
+    title: 'Production from the start',
+    body: 'Designed for high-volume manufacturing: calibrated for consistent performance, with the diagnostics and monitoring that large AI deployments require.',
+  },
+  {
+    title: 'Modulation- and channel-aware',
+    body: 'Flexible and scalable across modulation schemes and channel conditions, so the same approach extends as standards and systems evolve.',
+  },
+];
+---
+<Base title="Approach" description="Vega Links applies first-principles analog and DSP design to high-speed interconnect beyond 200G, across the full 0–50m reach of the AI datacenter.">
+  <PageHeader
+    eyebrow="Our approach"
+    title="A new path through an old wall."
+    lead="We are in stealth, so the how stays under wraps. What we can share is the philosophy guiding the work — and why we believe it breaks the bandwidth-and-reach tradeoff the industry is stuck on."
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="why-now panel">
+        <span class="eyebrow">Why now</span>
+        <p class="why-text">
+          The interconnect inside AI systems is growing in both <span class="text-accent">volume</span>
+          and <span class="text-accent">criticality</span> faster than conventional copper can keep up.
+          The ecosystem needs a way forward that preserves everything already built around it. That is
+          the opening — and the timing — we are built for.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Principles</span>
+        <h2>What guides the design</h2>
+      </div>
+      <div class="grid grid-3">
+        {principles.map((p) => (
+          <div class="card">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="stealth-note">
+        <span class="pill"><span class="dot"></span> Stealth mode</span>
+        <p>
+          Detailed architecture and results are shared under NDA with partners, candidates, and
+          investors. <a href={`${base}/contact`}>Reach out</a> to go deeper.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .why-now { padding: clamp(1.8rem, 4vw, 2.6rem); }
+  .why-text { font-size: clamp(1.2rem, 2.4vw, 1.6rem); line-height: 1.5; color: var(--text); font-weight: 500; margin: 0.6rem 0 0; }
+  .stealth-note { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+  .stealth-note p { margin: 0; }
+  .stealth-note a { color: var(--accent); font-weight: 600; }
+</style>

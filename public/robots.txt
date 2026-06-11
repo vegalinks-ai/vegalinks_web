@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vegalinks-karthik.github.io/vegalinks_web/sitemap-index.xml

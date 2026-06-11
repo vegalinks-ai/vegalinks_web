@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const pillars = [
+  {
+    title: 'A defining bottleneck',
+    body: 'AI compute scales only as fast as the fabric that connects it. Every new generation of accelerators multiplies the interconnect inside the rack — and bandwidth, reach, and power are now the limiters.',
+    href: '/market', cta: 'See the market',
+  },
+  {
+    title: 'Built for what comes after 200G',
+    body: 'The industry has scaled copper from 28G to 224G, but the next step strains reach and power budgets. We are engineering the interconnect that carries the ecosystem through its next generations.',
+    href: '/approach', cta: 'Our approach',
+  },
+  {
+    title: 'A team that has shipped this before',
+    body: 'Founded by a wireline-interconnect architect, with a team and advisors drawn from the companies that defined high-speed SerDes and optical DSP.',
+    href: '/team', cta: 'Meet the team',
+  },
+];
+---
+<Base>
+  <Hero />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="marquee">
+        <span>Beyond 200G</span><i>·</i>
+        <span>0–50m reach</span><i>·</i>
+        <span>AI scale-up networks</span><i>·</i>
+        <span>High-volume production</span><i>·</i>
+        <span>Stealth mode</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Vega Links</span>
+        <h2>The AI buildout runs on interconnect.<br />We are building its next generation.</h2>
+        <p class="lead">
+          Inside every AI rack is an exploding web of high-speed links. Keeping that fabric fast,
+          reliable, and efficient is one of the hardest — and most valuable — problems in the datacenter.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        {pillars.map((p) => (
+          <a class="card pillar" href={`${base}${p.href}`}>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            <span class="pillar-cta">{p.cta} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>We are hiring, and talking to investors.</h2>
+          <p class="lead">
+            If you build at the edge of analog, mixed-signal, and DSP — or you back the teams that do —
+            we should talk.
+          </p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn btn-primary" href={`${base}/careers`}>View open roles</a>
+          <a class="btn btn-ghost" href={`${base}/contact`}>Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .marquee {
+    display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center;
+    justify-content: center;
+    color: var(--faint);
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.82rem;
+    border-block: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+  .marquee i { color: var(--accent); font-style: normal; }
+  .pillar { display: flex; flex-direction: column; gap: 0.7rem; }
+  .pillar p { flex: 1; }
+  .pillar-cta { font-weight: 600; color: var(--accent); font-size: 0.92rem; }
+  .cta-band {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    background: linear-gradient(135deg, rgba(34,211,238,0.10), rgba(125,211,252,0.04));
+    border: 1px solid rgba(34,211,238,0.28);
+    border-radius: var(--radius);
+    padding: clamp(1.6rem, 4vw, 3rem);
+  }
+  .cta-band h2 { margin-bottom: 0.6rem; }
+  .cta-band p { margin: 0; }
+  .cta-band-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+</style>

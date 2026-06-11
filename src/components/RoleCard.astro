@@ -1,0 +1,19 @@
+---
+const { title, area, blurb } = Astro.props;
+---
+<a class="role card" href="mailto:careers@vegalinks.ai?subject=Application%3A%20{encodeURIComponent(title)}">
+  <div class="role-top">
+    <h3>{title}</h3>
+    <span class="role-area">{area}</span>
+  </div>
+  <p>{blurb}</p>
+  <span class="role-apply">Apply →</span>
+</a>
+
+<style>
+  .role { display: flex; flex-direction: column; gap: 0.6rem; }
+  .role-top { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .role-area { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .role p { margin: 0; flex: 1; }
+  .role-apply { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+</style>
