@@ -24,22 +24,43 @@ Deploy is automatic: **push to `main`** → GitHub Actions builds and publishes 
 Pages. No manual step. (Astro static site; `astro.config.mjs` has `site:
 'https://vegalinks.ai'`, `base: '/'`.)
 
-## Open items (decisions pending)
-1. **Contact form** — the Contact page currently has a form wired to a Formspree
-   endpoint, but it's being reconsidered (delivery wasn't smooth). Options on the
-   table: (a) drop the form, use clean direct-email cards; (b) switch to a
-   different form backend; (c) self-hosted form if/when moving to PHP hosting.
-   **On hold** pending a decision. No urgency.
-2. **Email routing for `info@` / `careers@`** — decide where these should land
-   (mailbox forwarding in the Microsoft 365 admin center, or via a form backend).
-   Not yet configured.
-3. **Hosting question (open):** whether to keep GitHub Pages (current — free,
-   auto-deploy, free HTTPS) or move the static build to GoDaddy cPanel hosting.
-   No technical need to move for a static site; revisit if consolidating.
-4. **CI maintenance (optional):** the deploy workflow uses GitHub Actions still on
-   Node 20, which GitHub is deprecating. Bump `actions/checkout`,
-   `actions/setup-node`, `actions/upload-artifact` (and confirm `withastro/action`)
-   to current versions when convenient.
+## NEXT TASK — auto-deploy pipeline to GoDaddy (decided, not yet built)
+Plan: keep **GitHub as the source of truth** and add a GitHub Actions workflow
+that builds the Astro site and **FTP-uploads `dist/` to GoDaddy cPanel
+`public_html`** on every push to `main` — so GoDaddy gets push-to-publish too (no
+manual re-zip/upload).
+
+To build it we need:
+- Confirm the GoDaddy product is **Web Hosting / cPanel** (has File Manager +
+  `public_html`), NOT Website Builder. A PHP/static host is required.
+- GoDaddy **FTP/SFTP credentials** added as GitHub repo **secrets** (e.g.
+  `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`) — added by the owner in repo
+  Settings → Secrets and variables → Actions. Never commit these.
+- A new workflow file (e.g. `.github/workflows/deploy-godaddy.yml`) using an
+  FTP-deploy action (e.g. `SamKirkland/FTP-Deploy-Action`) pointing `server-dir`
+  at `public_html/`.
+- Decide whether GoDaddy *replaces* GitHub Pages (repoint apex `A` record from
+  GitHub IPs to the GoDaddy hosting IP) or runs alongside it as a mirror.
+
+A one-time manual export bundle already exists locally (regenerable any time):
+`vegalinks_godaddy_export.zip` — built from `dist/` with GitHub-only files removed
+and an Apache `.htaccess` added (custom 404, force HTTPS, www→apex). The auto-deploy
+pipeline replaces the need to make this by hand.
+
+## Other open items
+1. **Contact form** — Contact page currently has a form wired to a Formspree
+   endpoint, but it's being reconsidered (delivery wasn't smooth). Options: (a)
+   drop the form, use clean direct-email cards; (b) different form backend; (c)
+   self-hosted PHP form if on GoDaddy hosting. **On hold.**
+2. **Email routing for `info@` / `careers@`** — decide where these land (M365
+   admin forwarding, or via a form backend). Not yet configured.
+3. **Repo privacy** — repo is currently **public**. Making it private would
+   disable GitHub Pages on the free plan (needs GitHub Pro, $4/mo). The site
+   content is public anyway; private would only hide source/history/notes. Moot if
+   hosting moves fully to GoDaddy.
+4. **CI maintenance (optional):** the existing Pages workflow uses GitHub Actions
+   on Node 20 (being deprecated). Bump `actions/checkout`, `actions/setup-node`,
+   `actions/upload-artifact` (and confirm `withastro/action`) when convenient.
 
 ## Content guardrails (stealth)
 Public copy reveals **no technical IP** — no architecture/mechanism details, no
